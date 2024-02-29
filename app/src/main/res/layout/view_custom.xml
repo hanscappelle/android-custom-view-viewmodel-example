@@ -32,7 +32,7 @@
         android:id="@+id/previous_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Previous label was"
+        android:text="@string/previous_text_info"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@id/previous_label"
         app:layout_constraintStart_toEndOf="parent"

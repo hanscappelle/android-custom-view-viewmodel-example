@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">CustomView VM</string>
     <string name="text_info">Click below label or resume View to get an updated text label</string>
+    <string name="previous_text_info">Previous label was</string>
 </resources>
