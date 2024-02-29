@@ -11,7 +11,12 @@ class CustomViewViewModel : ViewModel() {
         events.value = UiEvent.NewLabel("new label ${System.currentTimeMillis()}")
     }
 
+    private fun storePreviousLabel() {
+        events.value = UiEvent.KeepPreviousLabel
+    }
+
     fun onLabelSelected() {
+        storePreviousLabel()
         generateNewLabel()
     }
 
@@ -19,9 +24,13 @@ class CustomViewViewModel : ViewModel() {
         generateNewLabel()
     }
 
-    sealed class UiEvent {
+    fun onPause() {
+        storePreviousLabel()
+    }
 
+    sealed class UiEvent {
         data class NewLabel(val label: String) : UiEvent()
+        object KeepPreviousLabel : UiEvent()
     }
 
 }

@@ -8,10 +8,12 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.findViewTreeViewModelStoreOwner
+import be.hcpl.android.customviewvm.CustomViewViewModel.UiEvent
 
 class CustomView : ConstraintLayout, DefaultLifecycleObserver {
 
     private lateinit var labelView: TextView
+    private lateinit var previousLabelView: TextView
 
     constructor(context: Context) : super(context)
     constructor(context: Context, attrs: AttributeSet?) : super(context, attrs)
@@ -42,6 +44,7 @@ class CustomView : ConstraintLayout, DefaultLifecycleObserver {
     override fun onCreate(owner: LifecycleOwner) {
         super.onCreate(owner)
         labelView = findViewById(R.id.label)
+        previousLabelView = findViewById(R.id.previous_label)
         labelView.setOnClickListener { viewModel?.onLabelSelected() }
         // observe changes here
         viewModel?.events?.observe(owner) { handleEvent(it) }
@@ -49,6 +52,7 @@ class CustomView : ConstraintLayout, DefaultLifecycleObserver {
 
     override fun onPause(owner: LifecycleOwner) {
         super.onPause(owner)
+        viewModel?.onPause()
     }
 
     override fun onResume(owner: LifecycleOwner) {
@@ -56,15 +60,12 @@ class CustomView : ConstraintLayout, DefaultLifecycleObserver {
         viewModel?.onResume()
     }
 
-    override fun onDestroy(owner: LifecycleOwner) {
-        super.onDestroy(owner)
-    }
-
     // endregion
 
-    private fun handleEvent(event: CustomViewViewModel.UiEvent) {
+    private fun handleEvent(event: UiEvent) {
         when (event) {
-            is CustomViewViewModel.UiEvent.NewLabel -> labelView.text = event.label
+            is UiEvent.NewLabel -> labelView.text = event.label
+            UiEvent.KeepPreviousLabel -> previousLabelView.text = labelView.text
         }
     }
 

@@ -19,12 +19,35 @@
         android:id="@+id/label"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="32dp"
         android:textSize="40sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/previous_info"
         app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/text_info"
-        tools:text="test example"
-        android:gravity="center"/>
+        tools:text="test example" />
+
+    <TextView
+        android:id="@+id/previous_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Previous label was"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@id/previous_label"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/previous_label"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="16dp"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="previous label goes here" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
